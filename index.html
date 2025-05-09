@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrueStories - Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/ChatGPT Image Apr 22, 2025, 07_49_46 PM.png" alt="TrueStories Logo" />
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#stories">Stories</a>
+      <a href="signin.html">Register</a>
+    </nav>
+  </header>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>TrueStories is an online platform dedicated to giving individuals a voice by sharing their real-life experiences.
+      Our mission is to help people raise funds for essential causes such as medical treatment, education, community
+      projects, and personal goals. We aim to bridge the gap between those in need and generous donors who wish to make
+      a meaningful impact.</p>
+
+    <p>At TrueStories, we believe that every story has the power to inspire change. We provide a space where individuals
+      can tell their stories, connect with others who understand their struggles, and raise funds to turn their
+      aspirations into reality. Whether it’s a family in need of medical care or a community working on a social cause,
+      TrueStories helps connect people with the support they deserve.</p>
+
+    <p>Our platform is designed to be simple and transparent. Story owners can easily create campaigns to raise funds,
+      while donors can contribute securely through various methods, including UPI, bank transfers, and QR codes. We
+      strive to create a seamless donation process, ensuring that every contribution goes directly to those who need it
+      most.</p>
+
+    <p>TrueStories is more than just a fundraising platform; it’s a community where people come together to support each
+      other. We encourage users to share their journeys, offer encouragement, and participate in initiatives that can
+      create lasting change. Together, we can foster a culture of kindness, empathy, and collective action.</p>
+
+    <p>Join us in our mission to turn struggles into success stories. By sharing your story, donating, or volunteering,
+      you’re helping to make the world a better place, one story at a time.</p>
+  </section>
+
+
+
+  <section id="stories">
+    <h2>Stories</h2>
+    <div class="stories-grid">
+      <div class="story-card">
+        <img src="images/Hope for Stray Animals.jpg" alt="Story 1" />
+        <h3>Hope for Stray Animals</h3>
+        <p>Help abandoned animals get shelter and care.</p>
+      </div>
+
+      <div class="story-card">
+        <img src="images/Medical Aid for Children.jpeg" alt="Story 2" />
+        <h3>Medical Aid for Children</h3>
+        <p>Support urgent surgeries for kids in need.</p>
+      </div>
+
+      <div class="story-card">
+        <img src="images/Feeding the Hungry.jpeg" alt="Story 3" />
+        <h3>Feeding the Hungry</h3>
+        <p>Provide food for malnourished families.</p>
+      </div>
+
+      <div class="story-card">
+        <img src="images/Clean Water Mission.jpeg" alt="Story 4" />
+        <h3>Clean Water Mission</h3>
+        <p>Ensure access to clean drinking water in villages.</p>
+      </div>
+      <br>
+      <!-- 5th box as "View More" with blurry image -->
+      <a href="story.html" class="story-link">
+        <div class="story-card view-more">
+          <div class="overlay">
+            <h3>View More →</h3>
+          </div>
+        </div>
+      </a>
+      <br>
+      <!-- <a href="#" class="story-link">
+        <div class="story-card add-story">
+          <div class="overlay">
+            <h3>Add Your Story & Raise Fund →</h3>
+          </div>
+        </div>
+      </a>
+    </div> -->
+
+      <a href="#" id="add-story-button">
+        <div class="story-card add-story">
+          <div class="overlay">
+            <h3>Add Your Story & Raise Fund →</h3>
+          </div>
+        </div>
+      </a>
+      
+  </section>
+  <br>
+  <!-- Story Form Popup -->
+  <div id="story-form-popup" class="story-form-popup">
+    <div class="popup-content">
+      <span id="close-form" class="close-form">×</span>
+      <h3>Add/Update Your Story</h3>
+      <form id="story-form">
+        <input type="text" id="story-title" placeholder="Story Title" required>
+        <textarea id="story-description" placeholder="Story Description" required></textarea>
+        <input type="url" id="story-image" placeholder="Image URL" required>
+        <input type="url" id="story-video" placeholder="Video URL (Optional)">
+        <input type="text" id="account-number" placeholder="Account Number" required>
+        <input type="text" id="ifsc-code" placeholder="IFSC Code" required>
+        <input type="url" id="upi-id" placeholder="UPI ID (Optional)">
+        <input type="file" id="story-qr" placeholder="Upload QR (Optional)">
+        <button type="submit">Save Story</button>
+      </form>
+    </div>
+  </div>
+
+  <section id="footer">
+    <div class="footer-content">
+      <p>© 2025 TrueStories. All rights reserved.</p>
+      <p>Phone: +91-9876543210 | Email: <a href="mailto:support@truestories.org">support@truestories.org</a></p>
+      <p>Address: Pune, India</p>
+    </div>
+  </section>
+
+
+
+
+  <script>
+    // DOM elements
+    const addStoryButton = document.getElementById('add-story-button');
+    const storyFormPopup = document.getElementById('story-form-popup');
+    const closeFormButton = document.getElementById('close-form');
+    const storyForm = document.getElementById('story-form');
+    let editStoryIndex = null; // For editing stories
+
+    // Show the story form popup when the "Add Your Story & Raise Fund" button is clicked
+    addStoryButton.addEventListener('click', () => {
+      storyFormPopup.style.display = 'flex'; // Show popup
+    });
+
+    // Close the form when the close button is clicked
+    closeFormButton.addEventListener('click', () => {
+      storyFormPopup.style.display = 'none'; // Hide popup
+      storyForm.reset(); // Reset the form fields
+    });
+
+    // Handle form submission
+    storyForm.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent page reload
+
+      // Get form values
+      const title = document.getElementById('story-title').value;
+      const description = document.getElementById('story-description').value;
+      const image = document.getElementById('story-image').value;
+      const video = document.getElementById('story-video').value;
+      const accountNumber = document.getElementById('account-number').value;
+      const ifscCode = document.getElementById('ifsc-code').value;
+      const upiId = document.getElementById('upi-id').value;
+      const qr = document.getElementById('story-qr').files[0]; // For QR upload
+
+      const newStory = {
+        title,
+        description,
+        image,
+        video,
+        accountNumber,
+        ifscCode,
+        upiId,
+        qr
+      };
+
+      let stories = JSON.parse(localStorage.getItem('stories')) || [];
+
+      if (editStoryIndex === null) {
+        // Add new story to the beginning of the list
+        stories.unshift(newStory);
+      } else {
+        // Update existing story
+        stories[editStoryIndex] = newStory;
+        editStoryIndex = null; // Reset edit mode
+      }
+
+      // Save the stories to localStorage
+      localStorage.setItem('stories', JSON.stringify(stories));
+
+      // Hide the popup and reset the form
+      storyFormPopup.style.display = 'none';
+      storyForm.reset();
+
+      // Re-render the stories (you can implement a render function here to update the grid)
+      renderStories();
+    });
+
+    // Function to render stories (example using localStorage)
+    function renderStories() {
+      const storiesGrid = document.getElementById('stories-grid');
+      const stories = JSON.parse(localStorage.getItem('stories')) || [];
+
+      storiesGrid.innerHTML = ''; // Clear existing grid
+
+      // Create story cards dynamically
+      stories.forEach((story, index) => {
+        const storyCard = document.createElement('div');
+        storyCard.classList.add('story-card');
+        storyCard.innerHTML = `
+      <img src="${story.image}" alt="${story.title}" />
+      <h3>${story.title}</h3>
+      <p>${story.description}</p>
+      <button onclick="editStory(${index})">Edit</button>
+      <button onclick="deleteStory(${index})">Delete</button>
+    `;
+        storiesGrid.appendChild(storyCard);
+      });
+    }
+
+    // Function to edit an existing story
+    function editStory(index) {
+      const stories = JSON.parse(localStorage.getItem('stories')) || [];
+      const story = stories[index];
+
+      // Populate the form with the story data
+      document.getElementById('story-title').value = story.title;
+      document.getElementById('story-description').value = story.description;
+      document.getElementById('story-image').value = story.image;
+      document.getElementById('story-video').value = story.video || '';
+      document.getElementById('account-number').value = story.accountNumber;
+      document.getElementById('ifsc-code').value = story.ifscCode;
+      document.getElementById('upi-id').value = story.upiId || '';
+      document.getElementById('story-qr').value = story.qr || '';
+
+      // Set the index for editing
+      editStoryIndex = index;
+
+      // Show the form
+      storyFormPopup.style.display = 'flex';
+    }
+
+    // Function to delete a story
+    function deleteStory(index) {
+      if (confirm('Are you sure you want to delete this story?')) {
+        const stories = JSON.parse(localStorage.getItem('stories')) || [];
+        stories.splice(index, 1); // Remove the story at the specified index
+        localStorage.setItem('stories', JSON.stringify(stories)); // Save updated stories
+        renderStories(); // Re-render the stories
+      }
+    }
+
+    // Initial render of stories (when the page loads)
+    renderStories();
+
+  </script>
+
+</body>
+
+</html>
